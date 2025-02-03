@@ -1,0 +1,107 @@
+ git clone --recurse-submodules https://github.com/mjktwep/cvw
+ cd cvw
+ ls
+ echo $WALLY$
+ source ./setup.sh
+ echo $WALLY$
+ cd examples/C/hello
+ ls
+ gcc hello.c -o hello
+ wsim --sim questa rv64gc --elf hello
+ cd $WALLY/examples/asm/example
+ riscv64-unknown-elf-gcc -o example -march=rv32i -mabi=ilp32 -mcmodel=medany \ -nostartfiles -T../../link/link.ld example.S
+ riscv64-unknown-elf-gcc -o example -march=rv32i -mabi=ilp32 -mcmodel=medany -nostartfiles -T../../link/link.ld example.S
+ riscv64-unknown-elf-objdump -D example > example.objdump~
+ riscv64-unknown-elf-objdump -D example > example.objdump
+ history
+ ls
+ cd \$WALLY/examples/C/common/
+ cd $WALLY/examples/C/common/
+ ls
+ cat comm/test.ld
+ cd ..
+ cat common/test.ld
+ cd fir
+ cat Makefile
+ cd ..
+ cd asm
+ cd example
+ cat Makefile
+ make
+ make clean
+ cd ..
+ cd sumtest
+ make
+ spike +signature=sumtest.signature.output sumtest
+ diff sumtest.signature.output sumtest.reference_output
+ make clean
+ make
+ make sim
+ riscv64-unknown-elf-readelf -a sumtest
+ cd ..
+ cd C/sum
+ make
+ spike sum
+ wsim --sim questa rv64gc --elf sum
+ history
+
+3.3.4
+
+Wsim results:
+s = 10
+# mcycle = 80
+# minstret = 38
+
+
+Spike results:
+s = 10
+mcycle = 31
+minstret = 38
+
+
+4.0
+
+Spike results:
+y[0] = 4fad3f2f
+y[1] = 627c6236
+y[2] = 4fad3f32
+y[3] = 1e6f0e17
+y[4] = e190f1eb
+y[5] = b052c0ce
+y[6] = 9d839dc6
+y[7] = b052c0cb
+y[8] = e190f1e6
+y[9] = 1e6f0e12
+y[10] = 4fad3f2f
+y[11] = 627c6236
+y[12] = 4fad3f32
+y[13] = 1e6f0e17
+y[14] = e190f1eb
+y[15] = b052c0ce
+y[16] = 9d839dc6
+mcycle = 792
+minstret = 797
+
+
+Wsim results:
+y[0] = 4fad3f2f
+# y[1] = 627c6236
+# y[2] = 4fad3f32
+# y[3] = 1e6f0e17
+# y[4] = e190f1eb
+# y[5] = b052c0ce
+# y[6] = 9d839dc6
+# y[7] = b052c0cb
+# y[8] = e190f1e6
+# y[9] = 1e6f0e12
+# y[10] = 4fad3f2f
+# y[11] = 627c6236
+# y[12] = 4fad3f32
+# y[13] = 1e6f0e17
+# y[14] = e190f1eb
+# y[15] = b052c0ce
+# y[16] = 9d839dc6
+# mcycle = 943
+# minstret = 797
+
+
